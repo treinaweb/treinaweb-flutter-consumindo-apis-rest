@@ -36,7 +36,7 @@ class CadastrarContaScreen extends StatelessWidget {
                   child: Container(
                     height: 40,
                     width: double.infinity,
-                    child: RaisedButton(
+                    child: ElevatedButton(
                       onPressed: () {
                         Conta newConta = Conta(
                           titulo: _tituloController.text,
@@ -49,7 +49,9 @@ class CadastrarContaScreen extends StatelessWidget {
                           )
                         );
                       },
-                    color: Colors.blue,
+                      style: ElevatedButton.styleFrom(
+                        primary: Colors.blue
+                      ),
                     child: Text(
                       "Cadastrar",
                       style: TextStyle(

@@ -97,7 +97,7 @@ class _CadastrarTransacaoScreenState extends State<CadastrarTransacaoScreen> {
                         child: Container(
                           height: 40,
                           width: double.infinity,
-                          child: RaisedButton(
+                          child: ElevatedButton(
                             onPressed: () {
                               Transacao newTransacao = Transacao(
                                 titulo: _tituloController.text,
@@ -114,8 +114,10 @@ class _CadastrarTransacaoScreenState extends State<CadastrarTransacaoScreen> {
                                   )
                               );
                             },
-                            color: widget.tipoTransacao == 1 ?
-                            Colors.green : Colors.red,
+                            style: ElevatedButton.styleFrom(
+                              primary: widget.tipoTransacao == 1 ?
+                              Colors.green : Colors.red
+                            ),
                             child: Text("Cadastrar",
                             style: TextStyle(color: Colors.white, fontSize: 16),),
                           ),
