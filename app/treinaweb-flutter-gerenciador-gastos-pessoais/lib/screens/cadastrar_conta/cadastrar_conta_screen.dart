@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:gerenciador_gastos_pessoais/models/conta.dart';
 import 'package:gerenciador_gastos_pessoais/screens/home/home_screen.dart';
+import 'package:gerenciador_gastos_pessoais/services/conta_rest_service.dart';
 import 'package:gerenciador_gastos_pessoais/services/conta_service.dart';
 
 class CadastrarContaScreen extends StatelessWidget {
   final _tituloController = TextEditingController();
   final _saldoController = TextEditingController();
   ContaService cs = ContaService();
+  ContaRestService crs = ContaRestService();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,7 +44,8 @@ class CadastrarContaScreen extends StatelessWidget {
                           titulo: _tituloController.text,
                           saldo: double.parse(_saldoController.text)
                         );
-                        cs.addConta(newConta);
+                        // cs.addConta(newConta);
+                        crs.addConta(newConta);
                         Navigator.of(context).push(
                           MaterialPageRoute(
                             builder: (_) => HomeScreen(),
