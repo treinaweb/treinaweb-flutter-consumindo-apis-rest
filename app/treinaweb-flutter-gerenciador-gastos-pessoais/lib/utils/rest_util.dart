@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 class RestUtil {
-  static String urlBase = 'http://10.0.2.2:5000/';
+  static String urlBase = '10.0.2.2:5000';
 
   static Future<http.Response> addData(String uri, Map<String, Object> data) async {
     final response = await http.post(
