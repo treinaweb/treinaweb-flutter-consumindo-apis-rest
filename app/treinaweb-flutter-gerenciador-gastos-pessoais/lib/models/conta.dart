@@ -20,6 +20,12 @@ class Conta {
     };
   }
 
+  Conta.fromJson(Map json) {
+    id = json["id"];
+    titulo = json["titulo"];
+    saldo = json["saldo"];
+  }
+
   Conta.fromMap(Map map) {
     id = map["id"];
     titulo = map["titulo"];
