@@ -18,4 +18,13 @@ class ContaRestService {
     return contas;
   }
 
+  Future<Conta> getContaId(String id) async {
+    final Response response = await RestUtil.getDataId('contas', id);
+    if (response.statusCode == 200) {
+      return Conta.fromJson(json.decode(response.body));
+    } else {
+      throw Exception("Erro ao buscar a conta");
+    }
+  }
+
 }

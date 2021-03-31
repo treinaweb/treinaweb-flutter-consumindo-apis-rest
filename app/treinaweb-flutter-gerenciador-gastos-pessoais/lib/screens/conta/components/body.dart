@@ -4,6 +4,7 @@ import 'package:gerenciador_gastos_pessoais/models/transacao.dart';
 import 'package:gerenciador_gastos_pessoais/screens/components/card_conta.dart';
 import 'package:gerenciador_gastos_pessoais/screens/components/card_transacao.dart';
 import 'package:gerenciador_gastos_pessoais/screens/transacao/transacao_screen.dart';
+import 'package:gerenciador_gastos_pessoais/services/conta_rest_service.dart';
 import 'package:gerenciador_gastos_pessoais/services/conta_service.dart';
 import 'package:gerenciador_gastos_pessoais/services/transacao_service.dart';
 
@@ -19,6 +20,7 @@ class Body extends StatefulWidget {
 class _BodyState extends State<Body> {
   TransacaoService ts = TransacaoService();
   ContaService cs = ContaService();
+  ContaRestService crs = ContaRestService();
   Future<List> _loadTransacoes;
   Future<Conta> _loadConta;
   List<Transacao> _transacoes;
@@ -101,7 +103,7 @@ class _BodyState extends State<Body> {
   }
 
   Future<Conta> _getConta(int id) async {
-    return await cs.getConta(id);
+    return await crs.getContaId(id.toString());
   }
 
 }

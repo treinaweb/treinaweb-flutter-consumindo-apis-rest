@@ -23,4 +23,11 @@ class RestUtil {
     return response;
   }
 
+  static Future<http.Response> getDataId(String uri, String id) async {
+    final response = await http.get(
+      Uri.http(urlBase, uri + '/' + id),
+    );
+    return response;
+  }
+
 }
