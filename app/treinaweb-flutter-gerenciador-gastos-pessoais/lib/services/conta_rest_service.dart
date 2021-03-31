@@ -27,4 +27,13 @@ class ContaRestService {
     }
   }
 
+  Future<void> removeConta(String id) async {
+    final Response response = await RestUtil.removeDataId('contas', id);
+    if (response.statusCode == 204) {
+      print("conta removida");
+    } else {
+      throw Exception("Erro ao remover a conta");
+    }
+  }
+
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gerenciador_gastos_pessoais/models/conta.dart';
 import 'package:gerenciador_gastos_pessoais/screens/conta/conta_screen.dart';
+import 'package:gerenciador_gastos_pessoais/services/conta_rest_service.dart';
 
 Widget cardConta(BuildContext context, Conta conta) {
   return InkWell(
@@ -10,6 +11,9 @@ Widget cardConta(BuildContext context, Conta conta) {
               builder: (_) => ContaScreen(id: conta.id,)
           )
       );
+    },
+    onLongPress: () {
+      showAlertDialog(context, conta);
     },
     child: Container(
       margin: EdgeInsets.only(right: 10, left: 10),
@@ -54,4 +58,33 @@ Widget cardConta(BuildContext context, Conta conta) {
     ),
   );
 
+}
+
+showAlertDialog(BuildContext context, Conta conta) {
+  ContaRestService crs = ContaRestService();
+  Widget removerBotao = TextButton(
+      onPressed: () {
+        crs.removeConta(conta.id.toString());
+        Navigator.of(context, rootNavigator: true).pop();
+      },
+      child: Text("Remover")
+  );
+  Widget cancelarBotao = TextButton(
+      onPressed: () {
+        Navigator.of(context, rootNavigator: true).pop();
+      },
+      child: Text("Cancelar")
+  );
+
+  AlertDialog alerta = AlertDialog(
+    title: Text("Deseja remover a conta?"),
+    content: Text("Esta ação não pode ser desfeita"),
+    actions: [
+      removerBotao,
+      cancelarBotao
+    ],
+  );
+  showDialog(context: context, builder: (BuildContext context){
+    return alerta;
+  });
 }
