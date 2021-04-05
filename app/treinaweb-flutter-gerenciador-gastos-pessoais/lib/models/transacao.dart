@@ -1,10 +1,21 @@
 class Transacao {
-  int id, tipo, conta;
-  String titulo, descricao, data;
+  int id, conta;
+  String titulo, descricao, data, tipo;
   double valor;
 
   Transacao({this.id, this.tipo, this.conta, this.titulo, this.descricao,
   this.data, this.valor});
+
+  Map<String, dynamic> toJson() {
+    return {
+      'titulo': titulo,
+      'descricao': descricao,
+      'valor': valor,
+      'data': data,
+      'tipo': tipo,
+      'conta_id': conta
+    };
+  }
 
   Map<String, dynamic> toMap() {
     return {

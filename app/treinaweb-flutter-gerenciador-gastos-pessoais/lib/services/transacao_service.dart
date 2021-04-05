@@ -7,10 +7,10 @@ class TransacaoService {
   List<Transacao> _transacaoList = [];
   ContaService cs = ContaService();
 
-  void addTransacao(Transacao transacao) {
-    DbUtil.insertData('transacao', transacao.toMap());
-    cs.editSaldoConta(transacao.conta, transacao.valor, transacao.tipo);
-  }
+  // void addTransacao(Transacao transacao) {
+  //   DbUtil.insertData('transacao', transacao.toMap());
+  //   cs.editSaldoConta(transacao.conta, transacao.valor, transacao.tipo);
+  // }
 
   Future<List> getAllTransacoes() async {
     final dataList = await DbUtil.getData('transacao');

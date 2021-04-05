@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:gerenciador_gastos_pessoais/models/conta.dart';
 import 'package:gerenciador_gastos_pessoais/models/transacao.dart';
 import 'package:gerenciador_gastos_pessoais/screens/home/home_screen.dart';
+import 'package:gerenciador_gastos_pessoais/services/conta_rest_service.dart';
 import 'package:gerenciador_gastos_pessoais/services/conta_service.dart';
+import 'package:gerenciador_gastos_pessoais/services/transacao_rest_service.dart';
 import 'package:gerenciador_gastos_pessoais/services/transacao_service.dart';
 
 class CadastrarTransacaoScreen extends StatefulWidget {
@@ -21,10 +23,12 @@ class _CadastrarTransacaoScreenState extends State<CadastrarTransacaoScreen> {
   final _dataController = TextEditingController();
   Conta _contaSelecionada;
   ContaService cs = ContaService();
+  ContaRestService crs = ContaRestService();
   Future<List> _loadContas;
   List<Conta> _contas;
   DateTime selectedDate = DateTime.now();
   TransacaoService ts = TransacaoService();
+  TransacaoRestService trs = TransacaoRestService();
 
   @override
   void initState() {
@@ -102,12 +106,13 @@ class _CadastrarTransacaoScreenState extends State<CadastrarTransacaoScreen> {
                               Transacao newTransacao = Transacao(
                                 titulo: _tituloController.text,
                                 descricao: _descricaoController.text,
-                                tipo: widget.tipoTransacao,
+                                tipo: widget.tipoTransacao.toString(),
                                 valor: double.parse(_valorController.text),
-                                data: selectedDate.toString(),
+                                data: formatDate(selectedDate,
+                                    [yyyy, '-', mm, '-', dd]).toString(),
                                 conta: _contaSelecionada.id
                               );
-                              ts.addTransacao(newTransacao);
+                              trs.addTransacao(newTransacao);
                               Navigator.of(context).push(
                                   MaterialPageRoute(
                                       builder: (_) => HomeScreen()
@@ -153,6 +158,6 @@ class _CadastrarTransacaoScreenState extends State<CadastrarTransacaoScreen> {
   }
 
   Future<List> _getContas() async {
-    return await cs.getAllContas();
+    return await crs.getContas();
   }
 }
