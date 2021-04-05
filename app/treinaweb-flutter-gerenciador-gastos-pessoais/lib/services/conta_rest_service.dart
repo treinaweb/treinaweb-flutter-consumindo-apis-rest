@@ -12,10 +12,14 @@ class ContaRestService {
 
   Future<List<Conta>> getContas() async {
     final Response response = await RestUtil.getData('contas');
-    List<dynamic> conteudo = jsonDecode(response.body);
-    List<Conta> contas = conteudo.map((dynamic conta) =>
-        Conta.fromJson(conta)).toList();
-    return contas;
+    if (response.statusCode == 200) {
+      List<dynamic> conteudo = jsonDecode(response.body);
+      List<Conta> contas = conteudo.map((dynamic conta) =>
+          Conta.fromJson(conta)).toList();
+      return contas;
+    } else {
+      throw Exception("Erro ao listar as conta");
+    }
   }
 
   Future<Conta> getContaId(String id) async {

@@ -32,7 +32,7 @@ Widget cardTransacao(BuildContext context, int index, Transacao transacao) {
                   transacao.titulo,
                   style: TextStyle(
                     fontSize: 16, fontWeight: FontWeight.w700,
-                    // color: transacao.tipo == 1 ? Colors.green : Colors.red
+                    color: transacao.tipo == "TipoEnum.entrada" ? Colors.green : Colors.red
                   ),
                 ),
                 Text(

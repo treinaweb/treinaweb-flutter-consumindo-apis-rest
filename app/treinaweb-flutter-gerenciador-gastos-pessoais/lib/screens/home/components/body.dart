@@ -4,6 +4,7 @@ import 'package:gerenciador_gastos_pessoais/screens/components/card_transacao.da
 import 'package:gerenciador_gastos_pessoais/screens/transacao/transacao_screen.dart';
 import 'package:gerenciador_gastos_pessoais/services/conta_rest_service.dart';
 import 'package:gerenciador_gastos_pessoais/services/conta_service.dart';
+import 'package:gerenciador_gastos_pessoais/services/transacao_rest_service.dart';
 import 'package:gerenciador_gastos_pessoais/services/transacao_service.dart';
 
 class Body extends StatefulWidget {
@@ -15,6 +16,7 @@ class _BodyState extends State<Body> {
   ContaService cs = ContaService();
   TransacaoService ts = TransacaoService();
   ContaRestService crs = ContaRestService();
+  TransacaoRestService trs = TransacaoRestService();
   Future<List> _loadContas;
   Future<List> _loadTransacoes;
   List _contas;
@@ -118,6 +120,6 @@ class _BodyState extends State<Body> {
   }
 
   Future<List> _getTransacoes() async {
-    return await ts.getAllTransacoes();
+    return await trs.getTransacoes();
   }
 }
