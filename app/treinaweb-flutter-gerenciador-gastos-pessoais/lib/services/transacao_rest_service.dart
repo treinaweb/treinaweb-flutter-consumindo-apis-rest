@@ -20,4 +20,13 @@ class TransacaoRestService {
       throw Exception("Erro ao listar transações");
     }
   }
+
+  Future<Transacao> getTransacaoId(String id) async {
+    final response = await RestUtil.getDataId('transacoes', id);
+    if (response.statusCode == 200) {
+      return Transacao.fromJson(json.decode(response.body));
+    } else {
+      throw Exception("Erro ao buscar a transação");
+    }
+  }
 }
