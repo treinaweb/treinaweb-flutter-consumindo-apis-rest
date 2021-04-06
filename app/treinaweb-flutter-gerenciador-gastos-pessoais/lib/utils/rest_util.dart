@@ -37,4 +37,16 @@ class RestUtil {
     return response;
   }
 
+  static Future<http.Response> editData(String uri, Map<String, Object> data,
+      String id) async {
+    final response = await http.put(
+      Uri.http(urlBase, uri + '/' + id),
+      headers: <String, String> {
+        'Content-Type': 'application/json; charset=UTF-8'
+      },
+      body: jsonEncode(data),
+    );
+    return response;
+  }
+
 }

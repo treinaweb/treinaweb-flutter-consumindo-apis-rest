@@ -88,19 +88,33 @@ class _EditarTransacaoScreenState extends State<EditarTransacaoScreen> {
                           ),
                         ),
                       ),
-                      // DropdownButtonFormField(
-                      //   value: _contaSelecionada,
-                      //   onChanged: (Conta conta) {
-                      //     setState(() {
-                      //       _contaSelecionada = conta;
-                      //     });
-                      //   },
-                      //   items: _contas.map((conta) {
-                      //     return DropdownMenuItem<Conta>(
-                      //       value: conta, child: Text(conta.titulo),
-                      //     );
-                      //   }).toList(),
-                      // ),
+                      FutureBuilder(
+                        future: _loadContas,
+                        builder: (BuildContext context, AsyncSnapshot snapshot) {
+                          if (snapshot.hasData) {
+                            _contas = snapshot.data;
+                            var indice = _contas.indexWhere((conta) => conta.id == _transacao.conta);
+                            _contaSelecionada = _contas[indice];
+                            return DropdownButtonFormField(
+                              value: _contaSelecionada,
+                              onChanged: (Conta conta) {
+                                setState(() {
+                                  _contaSelecionada = conta;
+                                });
+                              },
+                              items: _contas.map((conta) {
+                                return DropdownMenuItem<Conta>(
+                                  value: conta, child: Text(conta.titulo),
+                                );
+                              }).toList(),
+                            );
+                          } else {
+                            return Center(
+                              child: CircularProgressIndicator(),
+                            );
+                          }
+                        },
+                      ),
                       Padding(
                         padding: EdgeInsets.only(top: 20, bottom: 20),
                         child: Container(
@@ -117,7 +131,7 @@ class _EditarTransacaoScreenState extends State<EditarTransacaoScreen> {
                                       [yyyy, '-', mm, '-', dd]).toString(),
                                   conta: _contaSelecionada.id
                               );
-                              trs.addTransacao(newTransacao);
+                              trs.editTransacao(newTransacao, _transacao.id.toString());
                               Navigator.of(context).push(
                                   MaterialPageRoute(
                                       builder: (_) => HomeScreen()

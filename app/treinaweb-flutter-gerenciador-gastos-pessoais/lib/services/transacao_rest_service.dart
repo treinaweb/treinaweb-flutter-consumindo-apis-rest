@@ -29,4 +29,22 @@ class TransacaoRestService {
       throw Exception("Erro ao buscar a transação");
     }
   }
+
+  Future<Transacao> editTransacao(Transacao transacao, String id) async {
+    final novaTransacao = {
+      'titulo': transacao.titulo,
+      'descricao': transacao.descricao,
+      'valor': transacao.valor,
+      'data': transacao.data,
+      'conta_id': transacao.conta,
+      'tipo': transacao.tipo == "TipoEnum.entrada" ? "1": "2"
+    };
+    final response = await RestUtil.editData('transacoes', novaTransacao, id);
+    if (response.statusCode == 200) {
+      print("transacao editada");
+    } else {
+      throw Exception("Erro ao editar a transação");
+    }
+  }
+
 }
