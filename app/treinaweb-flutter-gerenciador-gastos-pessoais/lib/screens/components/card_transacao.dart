@@ -3,8 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:gerenciador_gastos_pessoais/models/transacao.dart';
 import 'package:gerenciador_gastos_pessoais/screens/editar_transacao/editar_transacao_screen.dart';
+import 'package:gerenciador_gastos_pessoais/services/transacao_rest_service.dart';
 
 Widget cardTransacao(BuildContext context, int index, Transacao transacao) {
+  TransacaoRestService trs = TransacaoRestService();
+
+  Future<void> _removerTransacao(String id) async {
+    return await trs.removeTransacao(id);
+  }
+
   return Container(
     margin: EdgeInsets.only(bottom: 8, left: 10, right: 10),
     height: 68,
@@ -38,7 +45,9 @@ Widget cardTransacao(BuildContext context, int index, Transacao transacao) {
           caption: 'Remover',
           color: Colors.red,
           icon: Icons.delete,
-          onTap: () {},
+          onTap: () {
+            _removerTransacao(transacao.id.toString());
+          },
         )
       ],
       child: Row(

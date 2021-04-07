@@ -47,4 +47,13 @@ class TransacaoRestService {
     }
   }
 
+  Future<void> removeTransacao(String id) async {
+    final response = await RestUtil.removeDataId('transacoes', id);
+    if (response.statusCode == 204) {
+      print("Transacao removida com sucesso");
+    } else {
+      throw Exception("Erro ao remover a transação");
+    }
+  }
+
 }
