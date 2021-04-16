@@ -37,7 +37,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="/Users/fagnerpsantos/Developer/treinaweb/projeto-pratico/final/flask/api-gastos-pessoais/venv"
+VIRTUAL_ENV="/Users/fagnerpsantos/Developer/treinaweb/cursos/final/flutter/gerenciador_gastos_pessoais/api/treinaweb-flask-api-gastos-pessoais/venv"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"

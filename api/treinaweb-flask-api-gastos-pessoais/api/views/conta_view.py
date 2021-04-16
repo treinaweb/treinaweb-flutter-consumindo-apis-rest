@@ -9,14 +9,13 @@ from ..decorators import autorizacao_user
 from ..decorators.app_key import require_appkey
 
 class ContaList(Resource):
-    # @jwt_required
     @require_appkey
     def get(self):
         contas = conta_service.listar_contas()
         cs = conta_schema.ContaSchema(many=True)
         return make_response(cs.jsonify(contas), 200)
 
-    # @jwt_required
+    @require_appkey
     def post(self):
         cs = conta_schema.ContaSchema()
         validate = cs.validate(request.json)
@@ -31,13 +30,13 @@ class ContaList(Resource):
 
 
 class ContaDetail(Resource):
-    # @autorizacao_user.conta_user
+    @require_appkey
     def get(self, id):
         conta = conta_service.listar_conta_id(id)
         cs = conta_schema.ContaSchema()
         return make_response(cs.jsonify(conta), 200)
 
-    # @autorizacao_user.conta_user
+    @require_appkey
     def put(self, id):
         conta_bd = conta_service.listar_conta_id(id)
         cs = conta_schema.ContaSchema()
@@ -51,7 +50,7 @@ class ContaDetail(Resource):
             result = conta_service.editar_conta(conta_bd, conta_nova)
             return make_response(cs.jsonify(result), 201)
 
-    # @autorizacao_user.conta_user
+    @require_appkey
     def delete(self, id):
         conta = conta_service.listar_conta_id(id)
         conta_service.remover_conta(conta)

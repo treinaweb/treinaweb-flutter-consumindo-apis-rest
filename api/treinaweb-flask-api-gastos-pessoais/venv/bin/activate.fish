@@ -29,7 +29,7 @@ end
 # Unset irrelevant variables.
 deactivate nondestructive
 
-set -gx VIRTUAL_ENV "/Users/fagnerpsantos/Developer/treinaweb/projeto-pratico/final/flask/api-gastos-pessoais/venv"
+set -gx VIRTUAL_ENV "/Users/fagnerpsantos/Developer/treinaweb/cursos/final/flutter/gerenciador_gastos_pessoais/api/treinaweb-flask-api-gastos-pessoais/venv"
 
 set -gx _OLD_VIRTUAL_PATH $PATH
 set -gx PATH "$VIRTUAL_ENV/bin" $PATH

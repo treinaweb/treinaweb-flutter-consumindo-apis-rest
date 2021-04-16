@@ -6,16 +6,17 @@ from ..entidades import transacao
 from ..services import transacao_service, conta_service
 from flask_jwt_extended import jwt_required, get_jwt_identity
 from ..decorators import autorizacao_user
+from ..decorators.app_key import require_appkey
 
 class TransacaoList(Resource):
-    # @jwt_required
+    @require_appkey
     def get(self):
         usuario = get_jwt_identity()
         transacoes = transacao_service.listar_transacoes(usuario=usuario)
         cs = transacao_schema.TransacaoSchema(many=True)
         return make_response(cs.jsonify(transacoes), 200)
 
-    # @jwt_required
+    @require_appkey
     def post(self):
         cs = transacao_schema.TransacaoSchema()
         validate = cs.validate(request.json)
@@ -38,13 +39,13 @@ class TransacaoList(Resource):
                 return make_response(cs.jsonify(result), 201)
 
 class TransacaoDetail(Resource):
-    # @autorizacao_user.transacao_user
+    @require_appkey
     def get(self, id):
         transacao = transacao_service.listar_transacao_id(id)
         cs = transacao_schema.TransacaoSchema()
         return make_response(cs.jsonify(transacao), 200)
 
-    # @autorizacao_user.transacao_user
+    @require_appkey
     def put(self, id):
         transacao_bd = transacao_service.listar_transacao_id(id)
         cs = transacao_schema.TransacaoSchema()
@@ -66,7 +67,7 @@ class TransacaoDetail(Resource):
                 transacao_atualizada = transacao_service.editar_transacao(transacao_bd, transacao_nova)
                 return make_response(cs.jsonify(transacao_atualizada), 200)
 
-    # @autorizacao_user.transacao_user
+    @require_appkey
     def delete(self, id):
         transacao = transacao_service.listar_transacao_id(id)
         print(transacao)

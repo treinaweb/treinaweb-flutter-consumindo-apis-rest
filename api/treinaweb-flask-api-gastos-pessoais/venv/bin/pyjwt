@@ -1,4 +1,4 @@
-#!/Users/fagnerpsantos/Developer/treinaweb/projeto-pratico/final/flask/api-gastos-pessoais/venv/bin/python
+#!/Users/fagnerpsantos/Developer/treinaweb/cursos/final/flutter/gerenciador_gastos_pessoais/api/treinaweb-flask-api-gastos-pessoais/venv/bin/python
 # -*- coding: utf-8 -*-
 import re
 import sys
