@@ -53,6 +53,12 @@ class _BodyState extends State<Body> {
                             return cardConta(context, _contas[index]);
                           }
                       );
+                    } else if (snapshot.hasError) {
+                      return Center(
+                        child: Icon(
+                          Icons.enhanced_encryption_rounded
+                        ),
+                      );
                     } else {
                       return Center(
                         child: CircularProgressIndicator(),
@@ -102,6 +108,12 @@ class _BodyState extends State<Body> {
                           itemBuilder: (context, index) {
                           return cardTransacao(context, index, _transacoes[index]);
                           }
+                      ),
+                    );
+                  } else if (snapshot.hasError) {
+                    return Center(
+                      child: Icon(
+                          Icons.enhanced_encryption_rounded
                       ),
                     );
                   } else {

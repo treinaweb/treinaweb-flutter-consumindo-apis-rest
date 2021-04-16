@@ -20,9 +20,9 @@ class RestUtil {
   static Future<http.Response> getData(String uri) async {
     final response = await http.get(
       Uri.http(urlBase, uri),
-      // headers: <String, String> {
-      //   'x-api-key': 'sua_app_key'
-      // },
+      headers: <String, String> {
+        'x-api-key': 'sua_app_key'
+      },
     );
     return response;
   }
