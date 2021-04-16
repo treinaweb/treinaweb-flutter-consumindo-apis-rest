@@ -9,7 +9,8 @@ class RestUtil {
     final response = await http.post(
     Uri.http(urlBase, uri),
       headers: <String, String> {
-        'Content-Type': 'application/json; charset=UTF-8'
+        'Content-Type': 'application/json; charset=UTF-8',
+        'x-api-key': 'sua_app_key'
         },
       body: jsonEncode(data),
     );
@@ -19,6 +20,9 @@ class RestUtil {
   static Future<http.Response> getData(String uri) async {
     final response = await http.get(
       Uri.http(urlBase, uri),
+      // headers: <String, String> {
+      //   'x-api-key': 'sua_app_key'
+      // },
     );
     return response;
   }
@@ -26,6 +30,9 @@ class RestUtil {
   static Future<http.Response> getDataId(String uri, String id) async {
     final response = await http.get(
       Uri.http(urlBase, uri + '/' + id),
+      headers: <String, String> {
+        'x-api-key': 'sua_app_key'
+      },
     );
     return response;
   }
@@ -33,6 +40,9 @@ class RestUtil {
   static Future<http.Response> removeDataId(String uri, String id) async {
     final response = await http.delete(
       Uri.http(urlBase, uri + '/' + id),
+      headers: <String, String> {
+        'x-api-key': 'sua_app_key'
+      },
     );
     return response;
   }
@@ -42,7 +52,8 @@ class RestUtil {
     final response = await http.put(
       Uri.http(urlBase, uri + '/' + id),
       headers: <String, String> {
-        'Content-Type': 'application/json; charset=UTF-8'
+        'Content-Type': 'application/json; charset=UTF-8',
+        'x-api-key': 'sua_app_key'
       },
       body: jsonEncode(data),
     );
